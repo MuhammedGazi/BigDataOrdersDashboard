@@ -253,7 +253,7 @@ Veri:
 
             //OpenAI Api İsteği
             var httpClient = _httpClientFactory.CreateClient();
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "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");
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "apikey gelecek");
 
             var requestBody = new
             {
