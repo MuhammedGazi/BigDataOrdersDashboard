@@ -17,6 +17,7 @@ namespace BigDataOrdersDashboard.Controllers
 
         private void GetProductAndCustomer()
         {
+            //şimdilik kullanmıyoruz çok fazla ürün ve müşteri var revize edilecek
             var products = _context.Products.ToList();
             ViewBag.product = (from product in products
                                select new SelectListItem
@@ -36,7 +37,7 @@ namespace BigDataOrdersDashboard.Controllers
         public IActionResult OrderList(int page = 1)
         {
             int pageSize = 12; // her sayfada 12 kayıt
-            var values = _context.OrdersAll
+            var values = _context.Orders
                                  .OrderBy(p => p.OrderId)
                                  .Skip((page - 1) * pageSize)
                                  .Take(pageSize)
@@ -44,7 +45,7 @@ namespace BigDataOrdersDashboard.Controllers
                                  .Include(y => y.Customer)
                                  .ToList();
 
-            int totalCount = _context.OrdersAll.Count();
+            int totalCount = _context.Orders.Count();
             ViewBag.TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
             ViewBag.CurrentPage = page;
 
@@ -60,7 +61,8 @@ namespace BigDataOrdersDashboard.Controllers
         [HttpPost]
         public IActionResult CreateOrder(Order order)
         {
-            _context.OrdersAll.Add(order);
+            order.OrderDate = DateTime.Now;
+            _context.Orders.Add(order);
             _context.SaveChanges();
             return RedirectToAction(nameof(OrderList));
         }
@@ -69,21 +71,22 @@ namespace BigDataOrdersDashboard.Controllers
         public IActionResult UpdateOrder(int id)
         {
             GetProductAndCustomer();
-            var value = _context.OrdersAll.Find(id);
+            var value = _context.Orders.Find(id);
             return View(value);
         }
         [HttpPost]
         public IActionResult UpdateOrder(Order order)
         {
-            _context.OrdersAll.Update(order);
+            order.OrderDate = DateTime.Now;
+            _context.Orders.Update(order);
             _context.SaveChanges();
             return RedirectToAction(nameof(OrderList));
         }
 
         public IActionResult DeleteOrder(int id)
         {
-            var value = _context.OrdersAll.Find(id);
-            _context.OrdersAll.Remove(value);
+            var value = _context.Orders.Find(id);
+            _context.Orders.Remove(value);
             _context.SaveChanges();
             return RedirectToAction(nameof(OrderList));
         }

@@ -1,0 +1,47 @@
+﻿
+@*
+    _DashboardKpiComponentPartial
+*@
+<div class="col-lg-3 col-md-4">
+    <div class="row clearfix">
+
+        <div class="col-lg-12 col-md-6 col-sm-12">
+            <div class="card top-report">
+                <div class="body">
+                    <h3 class="m-t-0">@ViewBag.TodayOrderCount <i class="@ViewBag.TrendingIcon"></i></h3>
+                    <p class="text-muted">Bugünkü Sipariş Sayısı</p>
+                    <div class="progress">
+                        <div class="progress-bar l-turquoise" role="progressbar" aria-valuenow="@ViewBag.TodayVsAverageRatio" aria-valuemin="0" aria-valuemax="100" style="width:@(ViewBag.TodayVsAverageRatio.ToString().Replace(',', '.'))%;">></div>
+                    </div>
+                    <small style="color:@ViewBag.ChangeRateColor">Değişim: % @ViewBag.DailyOrderChange</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12 col-md-6 col-sm-12">
+            <div class="card top-report">
+                <div class="body">
+                    <h3 class="m-t-0">@ViewBag.CancelledOrders7Days <i class="zmdi zmdi-trending-up float-right"></i></h3>
+                    <p class="text-muted">İptal Edilen Siparişler</p>
+                    <div class="progress">
+                        <div class="progress-bar l-blush" role="progressbar" aria-valuenow="@ViewBag.CancelRate" aria-valuemin="0" aria-valuemax="100" style="width: @(ViewBag.CancelRate.ToString().Replace(',', '.'))%;"></div>
+                    </div>
+                    <small>Durum: @ViewBag.CancelText</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="card top-report">
+                <div class="body">
+                    <h3 class="m-t-0">@ViewBag.CompletedOrders <i class="zmdi zmdi-trending-down float-right"></i></h3>
+                    <p class="text-muted">Tamamlanan Siparişler</p>
+                    <div class="progress">
+                        <div class="progress-bar l-parpl" role="progressbar" aria-valuenow="@ViewBag.CompletionRate" aria-valuemin="0" aria-valuemax="100" style="width: @(ViewBag.CompletionRate.ToString().Replace(',', '.'))%;"></div>
+                    </div>
+                    <small>Durum: @ViewBag.CompletionText</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
