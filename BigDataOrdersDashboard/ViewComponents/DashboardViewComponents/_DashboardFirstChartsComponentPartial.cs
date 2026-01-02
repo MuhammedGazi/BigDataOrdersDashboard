@@ -62,4 +62,3 @@ namespace BigDataOrdersDashboard.ViewComponents.DashboardViewComponents
         }
     }
 }
-           
