@@ -1,5 +1,6 @@
 using BigDataOrdersDashboard.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.ML;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,8 @@ builder.Services.AddDbContext<BigDataOrdersDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddScoped<MLContext>();
 
 var app = builder.Build();
 
