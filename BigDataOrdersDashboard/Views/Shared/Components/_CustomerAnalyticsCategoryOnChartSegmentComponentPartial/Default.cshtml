@@ -1,0 +1,49 @@
+﻿<div class="card">
+    <div class="header">
+        <h2>Müşteri Sipariş Kategorileri</h2>
+        <small>Bugünkü Sipariş Sayıları</small>
+    </div>
+    <div class="body">
+        <div class="row">
+            <div class="col-sm-4 col-4 m-b-10">
+                <span class="text-muted">@ViewBag.TopCategory1Name</span>
+                <h5 class="m-b-0">@ViewBag.TopCategory1Count Adet</h5>
+            </div>
+            <div class="col-sm-4 col-4 m-b-10">
+                <span class="text-muted">@ViewBag.TopCategory2Name</span>
+                <h5 class="m-b-0">@ViewBag.TopCategory2Count Adet</h5>
+            </div>
+            <div class="col-sm-4 col-4 m-b-10">
+                <span class="text-muted">@ViewBag.TopCategory3Name</span>
+                <h5 class="m-b-0">@ViewBag.TopCategory3Count Adet</h5>
+            </div>
+        </div>
+
+        <div id="categoryChart"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+    var options = {
+        chart: {
+            type: 'line',
+            height: 350
+        },
+        stroke: {
+            width: 3,
+            curve: 'smooth'
+        },
+        series: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Series)),
+        xaxis: {
+            categories: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Years))
+        },
+        tooltip: {
+            shared: true,
+            intersect: false
+        }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#categoryChart"), options);
+    chart.render();
+</script>
